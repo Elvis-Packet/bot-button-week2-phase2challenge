@@ -8,16 +8,20 @@ const App = () => {
   const [army, setArmy] = useState([]);
   const [selectedBot, setSelectedBot] = useState(null);
 
+  // Enlist bot to the army
   const enlistBot = (bot) => {
     if (!army.some((b) => b.id === bot.id)) {
       setArmy([...army, bot]);
     }
+    setSelectedBot(null); // Automatically return to collection after enlistment
   };
 
+  // Release bot from army
   const releaseBot = (bot) => {
-    setArmy(army.filter((b) => b.id !== bot.id));
+    setArmy(army.filter((b) => b.id !== bot.id)); // Remove bot from the army
   };
 
+  // Go back to bot collection from specs
   const goBackToCollection = () => {
     setSelectedBot(null);
   };
@@ -29,8 +33,8 @@ const App = () => {
         <BotSpecs bot={selectedBot} onEnlist={enlistBot} onGoBack={goBackToCollection} />
       ) : (
         <>
-          <BotCollection onEnlist={enlistBot} setSelectedBot={setSelectedBot} />
-          <YourBotArmy army={army} onRelease={releaseBot} />
+          <BotCollection setSelectedBot={setSelectedBot} />
+          <YourBotArmy army={army} onRelease={releaseBot} /> {/* Pass releaseBot function here */}
         </>
       )}
     </div>

@@ -1,5 +1,5 @@
 body{
-  background-color: blue;
+  background-color: hsl(175, 100%, 50%);
 }
 .bot-collection, .your-bot-army {
   display: flex;
